@@ -1,6 +1,18 @@
+import 'zone.js';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { provideRouter, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+const routes: Routes = [
+  { path: '', title: 'Home Page', component: HomeComponent },
+  { path: 'home', title: 'Home Page', component: HomeComponent },
+  { path: 'contacts', title: 'Contacts Page', component: ContactsComponent },
+  { path: '**', title: 'Page Not Found', component: NotFoundComponent },
+];
+
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(routes)],
+});
